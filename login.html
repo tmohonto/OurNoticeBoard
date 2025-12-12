@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Our Notice Board</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="login-page">
+
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Welcome Back</h1>
+            <p>Please login to access the board</p>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+
+                <div id="errorMsg" class="error-msg hidden">Invalid credentials</div>
+
+                <button type="submit" class="primary-btn login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Check if already logged in
+        if (sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            if (user === 'we' && pass === '01') {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+            } else {
+                errorMsg.classList.remove('hidden');
+                // Shake animation reset
+                const card = document.querySelector('.login-card');
+                card.style.animation = 'none';
+                card.offsetHeight; /* trigger reflow */
+                card.style.animation = 'shake 0.4s';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice Board</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <h1>Our Notice Board</h1>
+            <button id="themeToggle" class="icon-btn theme-btn" title="Toggle Theme">
+                <!-- Sun Icon -->
+                <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <!-- Moon Icon -->
+                <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="feed-container">
+
+        <!-- Upload Section (Now at Top) -->
+        <section class="upload-card">
+            <div class="upload-content">
+                <textarea id="descInput" placeholder="What's on your mind? Add a description..." rows="2"></textarea>
+                <div class="upload-actions">
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <button id="selectImgBtn" class="icon-btn" title="Add Image">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <span>Add Photo</span>
+                    </button>
+                    <button id="postBtn" class="primary-btn">Post</button>
+                </div>
+                <div id="previewArea" class="preview-area hidden">
+                    <img id="imgPreview" src="" alt="Preview">
+                    <button id="removePreview" class="close-btn">&times;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feed Section -->
+        <section id="feed" class="feed">
+            <!-- Static Pinned Posts (Hardcoded as requested, but nicer) -->
+            <article class="post-card">
+                <div class="post-header">
+                    <div class="avatar admin-avatar">A</div>
+                    <div class="meta">
+                        <span class="username">Admin</span>
+                        <span class="time">Pinned</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>Welcome to our new Notice Board! Feel free to share your updates and photos below.</p>
+                </div>
+            </article>
+
+            <article class="post-card">
+                <div class="post-header">
+                    <div class="avatar admin-avatar">S</div>
+                    <div class="meta">
+                        <span class="username">System</span>
+                        <span class="time">Pinned</span>
+                    </div>
+                </div>
+                <div class="post-image">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+                        alt="updates">
+                </div>
+                <div class="post-content">
+                    <p>Upcoming community events will be listed here. Stay tuned!</p>
+                </div>
+            </article>
+
+            <!-- User posts go here -->
+            <div id="userPosts"></div>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
