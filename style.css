@@ -41,7 +41,7 @@ body.dark-mode {
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
     background-color: var(--bg-body);
     color: var(--text-primary);
     line-height: 1.6;
@@ -227,6 +227,12 @@ body.dark-mode .moon-icon {
 }
 
 /* Feed Posts */
+.feed {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 .post-card {
     background: var(--bg-card);
     border-radius: var(--radius);
@@ -306,8 +312,33 @@ body.dark-mode .moon-icon {
     display: block;
     max-height: 650px;
     object-fit: cover;
+    /* Border handled by wrapper now if needed, or keep here but overlay needs to sit on top */
+}
+
+.post-image {
+    position: relative;
     border-bottom: 1px solid var(--divider);
     border-top: 1px solid var(--divider);
+    margin-bottom: 0;
+    /* Remove margin between stacked images if immediate */
+}
+
+/* Text Overlay Styles */
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 2rem 1rem 1rem;
+    color: white;
+    z-index: 2;
+}
+
+.image-overlay p {
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Fix: Order image/content nicely if both exist */
@@ -441,5 +472,66 @@ body.dark-mode.login-page {
 
     75% {
         transform: translateX(5px);
+    }
+}
+
+/* Lightbox Styles */
+.lightbox {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.lightbox.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    line-height: 1;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
     }
 }

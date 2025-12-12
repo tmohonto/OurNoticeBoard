@@ -211,4 +211,31 @@ document.addEventListener('DOMContentLoaded', () => {
         div.textContent = text;
         return div.innerHTML;
     }
+
+    // --- Lightbox Logic ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    // Open Lightbox (Delegate event to handle static & dynamic posts)
+    document.body.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.closest('.post-image')) {
+            lightboxImg.src = e.target.src;
+            lightbox.classList.remove('hidden');
+        }
+    });
+
+    // Close Lightbox
+    lightboxClose.addEventListener('click', () => {
+        lightbox.classList.add('hidden');
+        lightboxImg.src = '';
+    });
+
+    // Close on Outside Click
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.add('hidden');
+            lightboxImg.src = '';
+        }
+    });
 });
